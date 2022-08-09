@@ -42,9 +42,46 @@ const allTodos = (req, res) => {
   });
 };
 
+// Update Todo
+const update = (req, res) => {
+  const todoID = req.params.todoID;
+  TodoModel.findByIdAndUpdate(todoID, req.body, { new: true }, (err, todo) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err: err.message,
+      });
+    }
+    return res.json({
+      success: true,
+      todo: todo,
+    });
+  });
+};
+
+// Single Todo
+
+const singleTodo = (req, res) => {
+  const todoID = req.params.todoID;
+  TodoModel.findById(todoID, (err, todo) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err: err.message,
+      });
+    }
+    return res.json({
+      success: true,
+      todo: todo,
+    });
+  });
+};
+
 const TodoController = {
   create,
   allTodos,
+  update,
+  singleTodo,
 };
 
 module.exports = TodoController;

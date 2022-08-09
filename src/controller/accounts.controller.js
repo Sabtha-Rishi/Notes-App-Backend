@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
       });
     } else {
       User.save(newUser);
-      return res.json({ isSuccess: true });
+      return res.json({ success: true });
     }
   });
 };
@@ -93,7 +93,7 @@ const loginUser = (req, res) => {
 const logoutUser = (req, res) => {
   res.clearCookie("token");
   return res.json({
-    isSuccess: true,
+    success: true,
   });
 };
 
@@ -189,12 +189,12 @@ const getSingleUser = (req, res) => {
   AccountsModel.findById(req.params.userId, (err, user) => {
     if (err) {
       return res.json({
-        isSuccess: false,
+        success: false,
         errr: err.message,
       });
     }
     return res.json({
-      isSuccess: true,
+      success: true,
       user: user,
     });
   });
