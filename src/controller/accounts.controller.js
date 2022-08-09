@@ -2,9 +2,9 @@ const User = require("../model/accounts.model");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
+const AccountsModel = require("../model/accounts.model");
 
 multer = require("multer");
-const AccountsModel = require("../model/accounts.model");
 
 JWT_SECRET = JWT_SECRET =
   "sKSDwsbdkJH&@#&297298ydkjhsdfqw83yr2893y(*YWuerh238ry0(U&)(09q3r209fwkjhfehJH}{}WJe38rywehfj))";

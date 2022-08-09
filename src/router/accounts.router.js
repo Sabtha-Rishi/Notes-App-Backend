@@ -15,30 +15,12 @@ AccountsRouter.post(
   AccountsController.upload.single("file"),
   AccountsController.createUser
 );
-
 AccountsRouter.post("/login", AccountsController.loginUser);
 AccountsRouter.post("/logout", AccountsController.logoutUser);
-AccountsRouter.delete(
-  "/delete",
-  ValidatorMiddleware.isLoggedin,
-  AccountsController.deleteUser
-);
-AccountsRouter.post(
-  "/user/update",
-  ValidatorMiddleware.isLoggedin,
-  AccountsController.updateUser
-);
-AccountsRouter.get(
-  "/user",
-  ValidatorMiddleware.isLoggedin,
-  AccountsController.getUser
-);
-
+AccountsRouter.delete("/delete",ValidatorMiddleware.isLoggedin,AccountsController.deleteUser);
+AccountsRouter.post("/user/update",ValidatorMiddleware.isLoggedin,AccountsController.updateUser);
+AccountsRouter.get("/user",ValidatorMiddleware.isLoggedin,AccountsController.getUser);
 AccountsRouter.get("/:userId", AccountsController.getSingleUser);
-AccountsRouter.post(
-  "/changepassword",
-  ValidatorMiddleware.isLoggedin,
-  AccountsController.changePassword
-);
+AccountsRouter.post("/changepassword",ValidatorMiddleware.isLoggedin,AccountsController.changePassword);
 
 module.exports = AccountsRouter;

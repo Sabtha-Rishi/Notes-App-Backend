@@ -1,16 +1,16 @@
 //BUILT IN IMPORTS
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+import express, { json } from "express";
+import cookieParser from "cookie-parser";
+import { connect } from "mongoose";
+import { config } from "dotenv";
+import { urlencoded } from "body-parser";
+import cors from "cors";
 
-dotenv.config();
+config();
 
 // ROUTER IMPORTS
 
-const AccountsRouter = require("./router/accounts.router");
+import AccountsRouter from "./router/accounts.router";
 // EXPRES APP
 const app = express();
 
@@ -36,16 +36,15 @@ app.use(function (req, res, next) {
 
 // MIDDLEWARES
 
-app.use(express.json());
+app.use(json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 app.set("trust proxy", 1);
 
 // Connect to MongoDB
-mongoose
-  .connect(
+connect(
     "mongodb+srv://admin:Rishi1234.@data.qcgzl.mongodb.net/DATA?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
@@ -60,4 +59,4 @@ app.use("/accounts", AccountsRouter);
 app.use("/requests", RequestsRouter);
 
 // EXPORTS
-module.exports = app;
+export default app;

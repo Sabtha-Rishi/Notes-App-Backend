@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // MODEL SCHEMA
 const TodoSchema = new mongoose.Schema({
-  userId: {
+  userID: {
     type: String,
     required: true,
   },

@@ -6,19 +6,16 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+
 dotenv.config();
 
 // ROUTER IMPORTS
 
 const AccountsRouter = require("./router/accounts.router");
+const TodoRouter = require("./router/todo.router");
 
 // EXPRES APP
 const app = express();
-
-// app.use((req, res, next) => {
-
-//   next();
-// });
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", req.headers.origin);
@@ -47,7 +44,7 @@ app.set("trust proxy", 1);
 // Connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://admin:Rishi1234.@data.qcgzl.mongodb.net/DATA?retryWrites=true&w=majority",
+    "mongodb+srv://admin:Rishi1234.@data.og0iv6q.mongodb.net/DATA?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -58,6 +55,7 @@ mongoose
 
 // ROUTES
 app.use("/accounts", AccountsRouter);
+app.use("/todo", TodoRouter);
 
 // EXPORTS
 module.exports = app;
