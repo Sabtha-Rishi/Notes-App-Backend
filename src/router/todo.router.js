@@ -7,6 +7,7 @@ const Validator = require("../middleware/validator.middleware");
 
 //  Routes (/todo)
 
+TodoRouter.get("/", Validator.isLoggedin, TodoController.allTodos);
 TodoRouter.post("/new", Validator.isLoggedin, TodoController.create);
 
 module.exports = TodoRouter;

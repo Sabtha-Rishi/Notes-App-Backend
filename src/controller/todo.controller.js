@@ -1,6 +1,7 @@
 const TodoModel = require("../model/todo.model");
 const jwt = require("jsonwebtoken");
 
+// New Todo
 const create = (req, res) => {
   const userID = jwt.verify(req.cookies.token, JWT_SECRET).id;
 
@@ -22,6 +23,28 @@ const create = (req, res) => {
   });
 };
 
-const TodoController = { create };
+// All User Todos
+
+const allTodos = (req, res) => {
+  const userID = jwt.verify(req.cookies.token, JWT_SECRET).id;
+
+  TodoModel.find({ userID: userID }, (err, todos) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err: err.message,
+      });
+    }
+    return res.json({
+      success: true,
+      todos: todos,
+    });
+  });
+};
+
+const TodoController = {
+  create,
+  allTodos,
+};
 
 module.exports = TodoController;
