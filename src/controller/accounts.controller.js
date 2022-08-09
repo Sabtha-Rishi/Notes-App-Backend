@@ -121,16 +121,21 @@ const getUser = (req, res) => {
 const updateUser = (req, res) => {
   const userID = jwt.verify(req.cookies.token, JWT_SECRET).id;
 
-  AccountsModel.findByIdAndUpdate(userID, req.body, (err, user) => {
-    if (err) {
-      return res.status(401).json({ err: err.message, isUpdated: false });
-    }
+  AccountsModel.findByIdAndUpdate(
+    userID,
+    req.body,
+    { new: true },
+    (err, user) => {
+      if (err) {
+        return res.status(401).json({ err: err.message, isUpdated: false });
+      }
 
-    if (!user) {
-      return res.status(401).json({ err: "No user found", isUpdated: false });
+      if (!user) {
+        return res.status(401).json({ err: "No user found", isUpdated: false });
+      }
+      return res.status(201).json({ user: user, isUpdated: true });
     }
-    return res.status(201).json({ user: user, isUpdated: true });
-  });
+  );
 };
 
 //Change Password
