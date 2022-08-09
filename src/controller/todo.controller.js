@@ -77,11 +77,28 @@ const singleTodo = (req, res) => {
   });
 };
 
+// Delete Todo
+const deleteTodo = (req, res) => {
+  const todoID = req.params.todoID;
+  TodoModel.deleteOne({ _id: todoID }, (err) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err: err.message,
+      });
+    }
+    return res.json({
+      success: true,
+    });
+  });
+};
+
 const TodoController = {
   create,
   allTodos,
   update,
   singleTodo,
+  deleteTodo,
 };
 
 module.exports = TodoController;
