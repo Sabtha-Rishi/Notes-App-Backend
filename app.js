@@ -26,6 +26,8 @@ app.use(function (req, res, next) {
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+
   cors({
     origin: req.headers.origin,
     credentials: true,
@@ -45,12 +47,12 @@ app.set("trust proxy", 1);
 
 // Connect to MongoDB
 connect(
-    "mongodb+srv://admin:Rishi1234.@data.qcgzl.mongodb.net/DATA?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  "mongodb+srv://admin:Rishi1234.@data.qcgzl.mongodb.net/DATA?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+)
   .then((result) => console.log("Connected to DB"))
   .catch((err) => console.log(err));
 

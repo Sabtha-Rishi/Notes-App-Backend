@@ -27,6 +27,11 @@ const TodoSchema = new mongoose.Schema({
     require: true,
     default: Date.now(),
   },
+  isArchieved: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 // ______________________________________ SCHEMA END  ____________________________
