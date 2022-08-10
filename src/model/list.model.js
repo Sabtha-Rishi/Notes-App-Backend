@@ -17,7 +17,7 @@ const ListSchema = new mongoose.Schema({
     default: "",
     maxLength: 120,
   },
-  tasks: [
+  todos: [
     {
       type: String,
     },

@@ -6,13 +6,13 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-
 dotenv.config();
 
 // ROUTER IMPORTS
 
 const AccountsRouter = require("./router/accounts.router");
 const TodoRouter = require("./router/todo.router");
+const ListRouter = require("./router/list.router");
 
 // EXPRES APP
 const app = express();
@@ -56,6 +56,7 @@ mongoose
 // ROUTES
 app.use("/accounts", AccountsRouter);
 app.use("/todo", TodoRouter);
+app.use("/list", ListRouter);
 
 // EXPORTS
 module.exports = app;

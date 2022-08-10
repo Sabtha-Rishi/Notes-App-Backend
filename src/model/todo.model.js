@@ -32,7 +32,14 @@ const TodoSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  isHidden: { // isHidden is used to filter out todos that are associated with other models(lists, etc)
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
+
+
 
 // ______________________________________ SCHEMA END  ____________________________
 //  _____________________________________ MODEL METHODS START _____________________
