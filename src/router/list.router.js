@@ -8,6 +8,7 @@ const Validator = require("../middleware/validator.middleware");
 //  Routes (/list)
 
 ListRouter.get("/", Validator.isLoggedin, ListController.allLists);
+ListRouter.get("/:listID", Validator.isLoggedin, ListController.getList);
 ListRouter.post("/new", Validator.isLoggedin, ListController.create);
 ListRouter.post("/add-todo", Validator.isLoggedin, ListController.addToList);
 

@@ -82,9 +82,40 @@ const allLists = (req, res) => {
   });
 };
 
+const getList = (req, res) => {
+  const userID = jwt.verify(req.cookies.token, JWT_SECRET).id;
+
+  ListModel.findById(req.params.listID, (err, list) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err: err.message,
+      });
+    }
+    if (list.userID != userID) {
+      return res.json({
+        success: false,
+        err: "Not authenticated",
+      });
+    }
+
+    TodoModel.find()
+      .where("_id")
+      .in(list.todos)
+      .exec((err, todosData) => {
+        return res.status(201).json({
+          success: true,
+          list: list,
+          todos: todosData,
+        });
+      });
+  });
+};
+
 const ListController = {
   create,
   addToList,
   allLists,
+  getList,
 };
 module.exports = ListController;
