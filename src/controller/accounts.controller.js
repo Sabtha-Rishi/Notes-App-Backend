@@ -4,54 +4,44 @@ const path = require("path");
 const fs = require("fs");
 const AccountsModel = require("../model/accounts.model");
 
-multer = require("multer");
-
 JWT_SECRET = JWT_SECRET =
   "sKSDwsbdkJH&@#&297298ydkjhsdfqw83yr2893y(*YWuerh238ry0(U&)(09q3r209fwkjhfehJH}{}WJe38rywehfj))";
-// STORAGE
-var Storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    fs.mkdir("./Files/", (err) => {
-      cb(null, "./Files/");
-    });
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now());
-  },
-});
-
-var upload = multer({ storage: Storage });
 
 //  Creating new user
+// NOTE: I have removed profile picture option to reduce database load on free version
 const createUser = async (req, res) => {
   console.log(req.body);
 
-  //Image Buffer
-  var img = fs.readFileSync(req.file.path);
-  var encode_img = img.toString("base64");
-
-  const profilePic = {
-    data: new Buffer.from(encode_img, "base64"),
-    contentType: req.file.mimetype,
-  };
-
   let newUser = new User(req.body);
 
-  newUser.profilePic = profilePic;
-
+  console.log(req.body);
   newUser.setPassword(req.body.password);
 
-  newUser.save((err, User) => {
+  newUser.save((err, user) => {
     if (err) {
       return res.status(400).send({
         error: err.message,
       });
-    } else {
-      User.save(newUser);
-      return res.json({ success: true });
     }
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      JWT_SECRET
+    );
+
+    res.cookie("token", token, {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      // sameSite: "none",
+      // secure: true,
+    });
+    return res.status(201).send({
+      isAuthenticated: true,
+    });
   });
 };
+
 
 // User Login and Token Generator
 const loginUser = (req, res) => {
@@ -202,7 +192,6 @@ const getSingleUser = (req, res) => {
 
 const AccountsController = {
   createUser,
-  upload,
   loginUser,
   logoutUser,
   deleteUser,

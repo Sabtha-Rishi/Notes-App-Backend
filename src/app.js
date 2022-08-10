@@ -36,7 +36,9 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.set("view engine", "ejs");
 app.set("trust proxy", 1);
