@@ -1,7 +1,10 @@
 const ListModel = require("../model/list.model");
 const TodoModel = require("../model/todo.model");
-const AccountsModel = require("../model/accounts.model");
 const jwt = require("jsonwebtoken");
+
+const JWT_SECRET =
+  "sKSDwsbdkJH&@#&297298ydkjhsdfqw83yr2893y(*YWuerh238ry0(U&)(09q3r209fwkjhfehJH}{}WJe38rywehfj))";
+
 
 // Create List
 

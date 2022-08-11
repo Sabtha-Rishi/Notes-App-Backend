@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const AccountsModel = require("../model/accounts.model");
 
-JWT_SECRET = JWT_SECRET =
+const JWT_SECRET =
   "sKSDwsbdkJH&@#&297298ydkjhsdfqw83yr2893y(*YWuerh238ry0(U&)(09q3r209fwkjhfehJH}{}WJe38rywehfj))";
 
 //  Creating new user

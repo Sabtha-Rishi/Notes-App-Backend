@@ -13,6 +13,7 @@ dotenv.config();
 const AccountsRouter = require("./router/accounts.router");
 const TodoRouter = require("./router/todo.router");
 const ListRouter = require("./router/list.router");
+const TransactionRouter = require("./router/transaction.router");
 
 // EXPRES APP
 const app = express();
@@ -39,7 +40,6 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.set("view engine", "ejs");
 app.set("trust proxy", 1);
 
@@ -59,6 +59,7 @@ mongoose
 app.use("/accounts", AccountsRouter);
 app.use("/todo", TodoRouter);
 app.use("/list", ListRouter);
+app.use("/transaction", TransactionRouter);
 
 // EXPORTS
 module.exports = app;

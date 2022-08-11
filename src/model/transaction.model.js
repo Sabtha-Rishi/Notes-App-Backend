@@ -15,6 +15,26 @@ const TransactionSchema = new mongoose.Schema({
     required: true,
     type: Number,
   },
+  category: {
+    type: String,
+    enum: [
+      "others",
+      "food",
+      "medicines",
+      "fashion",
+      "sport",
+      "bills",
+      "entertainment",
+      "travel",
+      "charity",
+      "savings",
+      "investment",
+      "work",
+      "groceries",
+    ],
+    required: true,
+    default: "others",
+  },
   isPending: {
     type: Boolean,
     required: true,
@@ -23,7 +43,6 @@ const TransactionSchema = new mongoose.Schema({
   isProfit: {
     type: Boolean,
     required: true,
-    default: false,
   },
   spent_at: {
     type: Date,
@@ -45,4 +64,7 @@ TransactionSchema.methods = {};
 //  _____________________________________ MODEL METHODS END ______________________
 //  _________________________________________ EXPORTS _____________________________
 
-const Transaction = (module.exports = mongoose.model("Transaction",TransactionSchema));
+const Transaction = (module.exports = mongoose.model(
+  "Transaction",
+  TransactionSchema
+));
