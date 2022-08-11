@@ -13,7 +13,6 @@ const ListSchema = new mongoose.Schema({
   },
   desc: {
     type: String,
-    required: true,
     default: "",
     maxLength: 120,
   },

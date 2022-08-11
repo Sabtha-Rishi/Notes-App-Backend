@@ -112,10 +112,27 @@ const getList = (req, res) => {
   });
 };
 
+const update = (req, res) => {
+  const listID = req.params.listID;
+  ListModel.findByIdAndUpdate(listID, req.body, { new: true }, (err, list) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err: err.message,
+      });
+    }
+    return res.json({
+      success: true,
+      list: list,
+    });
+  });
+};
+
 const ListController = {
   create,
   addToList,
   allLists,
   getList,
+  update,
 };
 module.exports = ListController;
