@@ -58,7 +58,7 @@ const addToRoutine = (req, res) => {
           });
         }
 
-        // Todo added to the list
+        // Todo added to the Routine
         return res.json({
           success: true,
           routine: routine,
@@ -94,7 +94,7 @@ const getRoutine = (req, res) => {
         err: err.message,
       });
     }
-    if (list.userID != userID) {
+    if (routine.userID != userID) {
       return res.json({
         success: false,
         err: "Not authenticated",

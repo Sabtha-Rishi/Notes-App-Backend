@@ -14,6 +14,7 @@ const AccountsRouter = require("./router/accounts.router");
 const TodoRouter = require("./router/todo.router");
 const ListRouter = require("./router/list.router");
 const TransactionRouter = require("./router/transaction.router");
+const RoutineRouter = require("./router/routine.router");
 
 // EXPRES APP
 const app = express();
@@ -60,6 +61,7 @@ app.use("/accounts", AccountsRouter);
 app.use("/todo", TodoRouter);
 app.use("/list", ListRouter);
 app.use("/transaction", TransactionRouter);
+app.use("/routine", RoutineRouter);
 
 // EXPORTS
 module.exports = app;
