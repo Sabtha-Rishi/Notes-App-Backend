@@ -1,5 +1,7 @@
 const RoutineModel = require("../model/routine.model");
 const TodoModel = require("../model/todo.model");
+const AccountsModel = require("../model/accounts.model");
+
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET =
@@ -141,11 +143,35 @@ const update = (req, res) => {
   );
 };
 
+const setDefaultRoutine = (req, res) => {
+  const routineID = req.params.routineID;
+
+  const userID = jwt.verify(req.cookies.token, JWT_SECRET).id;
+
+  AccountsModel.findByIdAndUpdate(
+    userID,
+    { defaultRoutine: routineID },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        return res.json({
+          success: false,
+          err: err.message,
+        });
+      }
+      return res.json({
+        success: true,
+      });
+    }
+  );
+};
+
 const RoutineController = {
   create,
   addToRoutine,
   allRoutines,
   getRoutine,
   update,
+  setDefaultRoutine,
 };
 module.exports = RoutineController;

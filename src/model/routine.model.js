@@ -41,6 +41,7 @@ const RoutineSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  
 });
 // ______________________________________ SCHEMA END  ____________________________
 //  _____________________________________ MODEL METHODS START _____________________

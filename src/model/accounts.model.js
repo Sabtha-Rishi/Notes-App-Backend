@@ -33,6 +33,10 @@ const AccountsSchema = new mongoose.Schema({
     contentType: String,
   },
 
+  defaultRoutine: {
+    type: String,
+    default: "",
+  },
   hash: String,
   salt: String,
 });
