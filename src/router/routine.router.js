@@ -23,6 +23,11 @@ RoutineRouter.post(
   Validator.isLoggedin,
   RoutineController.setDefaultRoutine
 );
+RoutineRouter.post(
+  "/:routineID/reset",
+  Validator.isLoggedin,
+  RoutineController.reset
+);
 RoutineRouter.post("/new", Validator.isLoggedin, RoutineController.create);
 RoutineRouter.post(
   "/add-todo",

@@ -143,6 +143,36 @@ const update = (req, res) => {
   );
 };
 
+const reset = (req, res) => {
+  const routineID = req.params.routineID;
+  RoutineModel.findById(routineID, (err, routine) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err: err.message,
+      });
+    }
+    TodoModel.updateMany(
+      { _id: { $in: routine.tasks } },
+      { isCompleted: false },
+      { new: true },
+      (err, tasks) => {
+        if (err) {
+          return res.json({
+            success: false,
+            err: err.message,
+          });
+        }
+        return res.json({
+          success: true,
+          routine: routine,
+          tasks: tasks,
+        });
+      }
+    );
+  });
+};
+
 const setDefaultRoutine = (req, res) => {
   const routineID = req.params.routineID;
 
@@ -173,5 +203,6 @@ const RoutineController = {
   getRoutine,
   update,
   setDefaultRoutine,
+  reset,
 };
 module.exports = RoutineController;
